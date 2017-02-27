@@ -10,7 +10,9 @@ import Foundation
 import CoreLocation
 
 class LocationManager : NSObject, CLLocationManagerDelegate {
+    var delegate: LocationManagerDelegate?
     var locationManager: CLLocationManager = CLLocationManager()
+    var mostRecentLocation: CLLocation? = nil
     
     override init() {
         super.init()
@@ -23,7 +25,8 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     
     func setupLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.distanceFilter = 200
     }
     
     func stopUpdatingLocation() {
@@ -32,6 +35,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     
     func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func resquestWhenInUseAuthorization() {
@@ -39,6 +43,12 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        mostRecentLocation = locations.last as CLLocation!
+        delegate?.didRecieveLocationUpdate(newLocation: mostRecentLocation!)
+        print("Location Update")
     }
+}
+
+protocol LocationManagerDelegate {
+    func didRecieveLocationUpdate(newLocation: CLLocation)
 }

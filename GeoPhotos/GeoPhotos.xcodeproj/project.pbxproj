@@ -18,6 +18,8 @@
 		21F64FF01E6496580000D3C2 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FEF1E6496580000D3C2 /* PhotoCollectionViewController.swift */; };
 		21F64FF41E6496990000D3C2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FF31E6496990000D3C2 /* LocationManager.swift */; };
 		21F64FF71E64B0EB0000D3C2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FF61E64B0EB0000D3C2 /* CollectionViewCell.swift */; };
+		21F64FFA1E64B8B80000D3C2 /* ServerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FF91E64B8B80000D3C2 /* ServerHelper.swift */; };
+		21F64FFC1E64DF700000D3C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FFB1E64DF700000D3C2 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		21F64FEF1E6496580000D3C2 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		21F64FF31E6496990000D3C2 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		21F64FF61E64B0EB0000D3C2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		21F64FF91E64B8B80000D3C2 /* ServerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerHelper.swift; sourceTree = "<group>"; };
+		21F64FFB1E64DF700000D3C2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				21F64FBD1E6492260000D3C2 /* AppDelegate.swift */,
+				21F64FFB1E64DF700000D3C2 /* Constants.swift */,
 				21F64FF11E6496630000D3C2 /* Storyboards */,
 				21F64FF21E6496700000D3C2 /* View Controllers */,
 				21F64FF81E64B0F10000D3C2 /* Collection View Cells */,
@@ -156,6 +161,7 @@
 		21F64FF51E6496E80000D3C2 /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				21F64FF91E64B8B80000D3C2 /* ServerHelper.swift */,
 				21F64FF31E6496990000D3C2 /* LocationManager.swift */,
 			);
 			name = "Helper Classes";
@@ -309,9 +315,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F64FBE1E6492260000D3C2 /* AppDelegate.swift in Sources */,
+				21F64FFA1E64B8B80000D3C2 /* ServerHelper.swift in Sources */,
 				21F64FF01E6496580000D3C2 /* PhotoCollectionViewController.swift in Sources */,
 				21F64FF71E64B0EB0000D3C2 /* CollectionViewCell.swift in Sources */,
 				21F64FF41E6496990000D3C2 /* LocationManager.swift in Sources */,
+				21F64FFC1E64DF700000D3C2 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

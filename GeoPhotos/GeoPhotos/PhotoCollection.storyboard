@@ -60,10 +60,10 @@
             </objects>
             <point key="canvasLocation" x="1084" y="142.57871064467767"/>
         </scene>
-        <!--Photo Collection Navigation Controller-->
+        <!--Photos-->
         <scene sceneID="5nC-ed-SuH">
             <objects>
-                <navigationController storyboardIdentifier="Photo Collection Navigation Controller" title="Photo Collection Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="Fco-jk-5vm" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Photo Collection Navigation Controller" title="Photos" automaticallyAdjustsScrollViewInsets="NO" id="Fco-jk-5vm" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ms3-Yc-N30">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
