@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		21F64FBE1E6492260000D3C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FBD1E6492260000D3C2 /* AppDelegate.swift */; };
-		21F64FC01E6492260000D3C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FBF1E6492260000D3C2 /* ViewController.swift */; };
 		21F64FC31E6492260000D3C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F64FC11E6492260000D3C2 /* Main.storyboard */; };
 		21F64FC51E6492260000D3C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21F64FC41E6492260000D3C2 /* Assets.xcassets */; };
 		21F64FC81E6492260000D3C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F64FC61E6492260000D3C2 /* LaunchScreen.storyboard */; };
 		21F64FD31E6492260000D3C2 /* GeoPhotosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FD21E6492260000D3C2 /* GeoPhotosTests.swift */; };
 		21F64FDE1E6492260000D3C2 /* GeoPhotosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FDD1E6492260000D3C2 /* GeoPhotosUITests.swift */; };
+		21F64FEC1E64947C0000D3C2 /* PhotoCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F64FEB1E64947C0000D3C2 /* PhotoCollection.storyboard */; };
+		21F64FEE1E6494850000D3C2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F64FED1E6494850000D3C2 /* Settings.storyboard */; };
+		21F64FF01E6496580000D3C2 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FEF1E6496580000D3C2 /* PhotoCollectionViewController.swift */; };
+		21F64FF41E6496990000D3C2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FF31E6496990000D3C2 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,6 @@
 /* Begin PBXFileReference section */
 		21F64FBA1E6492260000D3C2 /* GeoPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F64FBD1E6492260000D3C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		21F64FBF1E6492260000D3C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		21F64FC21E6492260000D3C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21F64FC41E6492260000D3C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21F64FC71E6492260000D3C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,10 @@
 		21F64FD91E6492260000D3C2 /* GeoPhotosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoPhotosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F64FDD1E6492260000D3C2 /* GeoPhotosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPhotosUITests.swift; sourceTree = "<group>"; };
 		21F64FDF1E6492260000D3C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21F64FEB1E64947C0000D3C2 /* PhotoCollection.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoCollection.storyboard; sourceTree = "<group>"; };
+		21F64FED1E6494850000D3C2 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		21F64FEF1E6496580000D3C2 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
+		21F64FF31E6496990000D3C2 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				21F64FBD1E6492260000D3C2 /* AppDelegate.swift */,
-				21F64FBF1E6492260000D3C2 /* ViewController.swift */,
-				21F64FC11E6492260000D3C2 /* Main.storyboard */,
+				21F64FF11E6496630000D3C2 /* Storyboards */,
+				21F64FF21E6496700000D3C2 /* View Controllers */,
 				21F64FC41E6492260000D3C2 /* Assets.xcassets */,
-				21F64FC61E6492260000D3C2 /* LaunchScreen.storyboard */,
 				21F64FC91E6492260000D3C2 /* Info.plist */,
 			);
 			path = GeoPhotos;
@@ -123,6 +128,26 @@
 				21F64FDF1E6492260000D3C2 /* Info.plist */,
 			);
 			path = GeoPhotosUITests;
+			sourceTree = "<group>";
+		};
+		21F64FF11E6496630000D3C2 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				21F64FC11E6492260000D3C2 /* Main.storyboard */,
+				21F64FEB1E64947C0000D3C2 /* PhotoCollection.storyboard */,
+				21F64FED1E6494850000D3C2 /* Settings.storyboard */,
+				21F64FC61E6492260000D3C2 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		21F64FF21E6496700000D3C2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				21F64FEF1E6496580000D3C2 /* PhotoCollectionViewController.swift */,
+				21F64FF31E6496990000D3C2 /* LocationManager.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +263,8 @@
 				21F64FC81E6492260000D3C2 /* LaunchScreen.storyboard in Resources */,
 				21F64FC51E6492260000D3C2 /* Assets.xcassets in Resources */,
 				21F64FC31E6492260000D3C2 /* Main.storyboard in Resources */,
+				21F64FEC1E64947C0000D3C2 /* PhotoCollection.storyboard in Resources */,
+				21F64FEE1E6494850000D3C2 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,8 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21F64FC01E6492260000D3C2 /* ViewController.swift in Sources */,
 				21F64FBE1E6492260000D3C2 /* AppDelegate.swift in Sources */,
+				21F64FF01E6496580000D3C2 /* PhotoCollectionViewController.swift in Sources */,
+				21F64FF41E6496990000D3C2 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
