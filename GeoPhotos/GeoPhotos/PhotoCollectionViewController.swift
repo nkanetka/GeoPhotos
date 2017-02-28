@@ -9,17 +9,10 @@
 import UIKit
 import CoreLocation
 
-private let reuseIdentifier = "CollectionViewCell"
-
 class PhotoCollectionViewController: UICollectionViewController, LocationManagerDelegate, ServerHelperDelegate {
-    
     var selectedIndex: Int = -1
-    var photos: [UIImage] = []
-    var photosInfoDictionary: [[String:Any]] = [[:]]
-    
-    var photosArray: [Photo] = []
-    
     var locations: [CLLocation] = []
+    var photosArray: [Photo] = []
     var serverHelper: ServerHelper = ServerHelper()
     var locationManager: LocationManager = LocationManager()
     
@@ -31,9 +24,6 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         locationManager.delegate = self
         locationManager.initialize()
         locationManager.startUpdatingLocation()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,14 +48,12 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(photosArray.count)
         return photosArray.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GPCollectionViewCellReuseIdentifier, for: indexPath) as! CollectionViewCell
         
         if photosArray.count > 0 {
             let photo: Photo = photosArray[indexPath.item]
@@ -87,13 +75,11 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         return true
     }
 
-    // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
-        print("Selected Item")
         performSegue(withIdentifier: "GPShowPhotoDetailSegue", sender: self)
     }
 
@@ -129,8 +115,6 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     func didRecieveDictionaryOfPhotoSize(photosArray: [Photo]) {
         self.photosArray.removeAll()
         self.photosArray = photosArray
-        let photo: Photo = self.photosArray[1]
-        print(photo.mediumImageURL)
         serverHelper.getImagesFor(listOfPhotos: self.photosArray)
     }
     
@@ -141,15 +125,4 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
             self.collectionView?.reloadData()
         }
     }
-    
-    func didFetchPhotos(newPhotos: [UIImage]) {
-        photos.removeAll()
-        photos = newPhotos
-        DispatchQueue.main.async {
-            self.collectionView?.reloadData()
-        }
-    }
-    
-    // MARK: - Methods
-    
 }

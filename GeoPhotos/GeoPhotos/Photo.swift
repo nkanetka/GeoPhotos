@@ -31,7 +31,6 @@ class Photo: NSObject {
                 if let ownerData = photoData["owner"] as? [String:Any] {
                     if let realname = ownerData["realname"] as? String {
                         author = realname
-                        
                         if author.isEmpty {
                             if let username = ownerData["username"] as? String {
                                 author = username
@@ -42,28 +41,46 @@ class Photo: NSObject {
                 if let locationData = photoData["location"] as? [String:Any] {
                     if let lat = locationData["latitude"] as? String {
                         latitude = lat
+                        if latitude.isEmpty {
+                            latitude = GPUnknownString
+                        }
                     }
                     if let lon = locationData["longitude"] as? String {
                         longitude = lon
+                        if longitude.isEmpty {
+                            longitude = GPUnknownString
+                        }
                     }
                     if let localityData = locationData["locality"] as? [String:Any] {
                         if let content = localityData["_content"] as? String {
                             city = content
+                            if city.isEmpty {
+                                city = GPUnknownString
+                            }
                         }
                     }
                     if let countyData = locationData["county"] as? [String:Any] {
                         if let content = countyData["_content"] as? String {
                             county = content
+                            if county.isEmpty {
+                                county = GPUnknownString
+                            }
                         }
                     }
                     if let regionData = locationData["region"] as? [String:Any] {
                         if let content = regionData["_content"] as? String {
                             state = content
+                            if state.isEmpty {
+                                state = GPUnknownString
+                            }
                         }
                     }
                     if let countryData = locationData["country"] as? [String:Any] {
                         if let content = countryData["_content"] as? String {
                             country = content
+                            if country.isEmpty {
+                                country = GPUnknownString
+                            }
                         }
                     }
                 }

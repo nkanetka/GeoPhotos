@@ -19,20 +19,15 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
         super.init()
     }
     
+    func setDistanceFilter() {
+        locationManager.distanceFilter = CLLocationDistance((searchDistance * 1000) / 2)
+    }
+    
     func initialize() {
         setupLocationManager()
         self.resquestWhenInUseAuthorization()
         notificationCenter.addObserver(self, selector:#selector(LocationManager.setDistanceFilter), name: NSNotification.Name(rawValue: GPNotificationUpdateDistanceFilter), object: nil)
-    }
-    
-    func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.distanceFilter = 200
-    }
-    
-    func setDistanceFilter() {
-        locationManager.distanceFilter = CLLocationDistance((searchDistance * 1000) / 2)
+        notificationCenter.addObserver(self, selector:#selector(LocationManager.stopUpdatingLocation), name: NSNotification.Name(rawValue: GPNotificationStopUpdatingLocation), object: nil)
     }
     
     func stopUpdatingLocation() {
@@ -44,14 +39,19 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
         locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    func resquestWhenInUseAuthorization() {
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.distanceFilter = 200
+    }
+    
+    private func resquestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         mostRecentLocation = locations.last as CLLocation!
         delegate?.didRecieveLocationUpdate(newLocation: mostRecentLocation!)
-        print("Location Update")
     }
 }
 

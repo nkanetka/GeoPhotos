@@ -13,9 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         getData()
         return true
     }
@@ -39,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name: NSNotification.Name(rawValue: GPNotificationStopUpdatingLocation), object: nil)
         setData()
     }
     
@@ -60,7 +60,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.set(travelMode, forKey: GPUserDefaultsTravelModeKey)
         defaults.set(searchDistance, forKey: GPUserDefaultsSearchDistanceKey)
     }
-
-
 }
 

@@ -59,7 +59,7 @@
                             <outlet property="delegate" destination="xrD-pX-V37" id="clQ-2A-mBV"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="gUG-A7-HWl"/>
+                    <navigationItem key="navigationItem" title="Nearest Photos" id="gUG-A7-HWl"/>
                     <connections>
                         <segue destination="Fh3-qb-dQc" kind="show" identifier="GPShowPhotoDetailSegue" id="A1I-nw-qnc"/>
                     </connections>

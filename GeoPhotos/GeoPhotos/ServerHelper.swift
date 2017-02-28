@@ -13,10 +13,7 @@ import CoreLocation
 class ServerHelper: NSObject {
     
     var delegate: ServerHelperDelegate?
-    var photosDictionaryArray: [[String:Any]] = [[:]]
-    var photoURLsArray: [String] = []
-    var photosArray: [UIImage] = []
-    var array: [Photo] = []
+    var photosArray: [Photo] = []
     
     override init() {
         super.init()
@@ -42,8 +39,8 @@ class ServerHelper: NSObject {
     }
     
     func getDictionaryOfPhotoSizesFor(listOfPhotos: [Photo]) {
-        array.removeAll()
-        array = listOfPhotos
+        photosArray.removeAll()
+        photosArray = listOfPhotos
         for photo in listOfPhotos {
             let url = GPFlickrBaseUrl + GPFLickrPhotosMethod + GPFlickrAPIKey + "photo_id=" + photo.id + "&" + GPFlickrOptions
             callFlickrAPI(endpoint: url, photo: photo)
@@ -51,8 +48,8 @@ class ServerHelper: NSObject {
     }
     
     func getImagesFor(listOfPhotos: [Photo]) {
-        array.removeAll()
-        array = listOfPhotos
+        photosArray.removeAll()
+        photosArray = listOfPhotos
         
         for photo in listOfPhotos {
             if photo.mediumImageURL != "" {
@@ -79,29 +76,24 @@ class ServerHelper: NSObject {
                     case 200:
                         if endpoint.range(of: "flickr.photos.search") != nil {
                             let json = self.parseData(data: data!)
-                            print("flickr.photos.search")
                             self.getArrayOfPhotosIDs(flickrJsonObject: json)
                         }
                         if endpoint.range(of: "flickr.photos.getSizes") != nil {
                             let json = self.parseData(data: data!)
-                            print("flickr.photos.getSizes")
                             photo?.imageSizeDictionary = json
                             
-                            if (photo?.isEqual(self.array.last))! {
-                                print("Reached the last object")
-                                self.delegate?.didRecieveDictionaryOfPhotoSize(photosArray: self.array)
+                            if (photo?.isEqual(self.photosArray.last))! {
+                                self.delegate?.didRecieveDictionaryOfPhotoSize(photosArray: self.photosArray)
                             }
                         }
                         if endpoint.range(of: "farm") != nil {
-                            print("Calling API")
                             photo?.image = UIImage(data: data!)!
                             
-                            if (photo?.isEqual(self.array.last))! {
-                                self.delegate?.didRecievePhotos(photosArray: self.array)
+                            if (photo?.isEqual(self.photosArray.last))! {
+                                self.delegate?.didRecievePhotos(photosArray: self.photosArray)
                             }
                         }
                         if endpoint.range(of: "flickr.photos.getInfo") != nil {
-                            print("flickr.photos.getInfo")
                             let json = self.parseData(data: data!)
                             photo?.photoDataDictionary = json
                         }
@@ -132,17 +124,17 @@ class ServerHelper: NSObject {
     }
     
     private func getArrayOfPhotosIDs(flickrJsonObject: [String:Any]) {
-        array.removeAll()
+        photosArray.removeAll()
         if let photos = flickrJsonObject["photos"] as? [String:Any] {
-            photosDictionaryArray = photos["photo"] as! [[String : Any]]
+            let photosDictionaryArray = photos["photo"] as! [[String : Any]]
             
             for photo in photosDictionaryArray {
                 let newPhoto = Photo()
                 newPhoto.id = photo["id"] as! String
                 newPhoto.title = photo["title"] as! String
-                array.append(newPhoto)
+                photosArray.append(newPhoto)
             }
-            delegate?.didRecieveListOfPhotos(photosArray: array)
+            delegate?.didRecieveListOfPhotos(photosArray: photosArray)
         }
     }
     
@@ -166,5 +158,4 @@ protocol ServerHelperDelegate {
     func didRecieveListOfPhotos(photosArray: [Photo])
     func didRecieveDictionaryOfPhotoSize(photosArray: [Photo])
     func didRecievePhotos(photosArray: [Photo])
-    func didFetchPhotos(newPhotos: [UIImage])
 }
