@@ -14,6 +14,7 @@ class ServerHelper: NSObject {
     
     var delegate: ServerHelperDelegate?
     var photosArray: [Photo] = []
+    var gettingSingleImage: Bool = false
     
     override init() {
         super.init()
@@ -63,6 +64,13 @@ class ServerHelper: NSObject {
         callFlickrAPI(endpoint: endpoint, photo: photo)
     }
     
+    func getImageFor(photo: Photo) {
+        gettingSingleImage = true
+        if photo.mediumImageURL != "" {
+            self.callFlickrAPI(endpoint: photo.mediumImageURL, photo: photo)
+        }
+    }
+    
     private func callFlickrAPI(endpoint: String, photo: Photo?) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         var request = URLRequest(url: URL(string: endpoint)!)
@@ -89,8 +97,13 @@ class ServerHelper: NSObject {
                         if endpoint.range(of: "farm") != nil {
                             photo?.image = UIImage(data: data!)!
                             
-                            if (photo?.isEqual(self.photosArray.last))! {
-                                self.delegate?.didRecievePhotos(photosArray: self.photosArray)
+                            if self.gettingSingleImage {
+                                self.gettingSingleImage = false
+                            }
+                            else {
+                                if (photo?.isEqual(self.photosArray.last))! {
+                                    self.delegate?.didRecievePhotos(photosArray: self.photosArray)
+                                }
                             }
                         }
                         if endpoint.range(of: "flickr.photos.getInfo") != nil {

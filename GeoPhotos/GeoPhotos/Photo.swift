@@ -27,6 +27,7 @@ class Photo: NSObject {
     var image: UIImage!
     var photoDataDictionary: [String:Any] = [:] {
         willSet(newDictionary) {
+            checkIfPhotoHasImageLoaded()
             if let photoData = newDictionary["photo"] as? [String:Any] {
                 if let ownerData = photoData["owner"] as? [String:Any] {
                     if let realname = ownerData["realname"] as? String {
@@ -99,6 +100,15 @@ class Photo: NSObject {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func checkIfPhotoHasImageLoaded() {
+        if self.mediumImageURL != "" {
+            if self.image == nil {
+                let serverHelper = ServerHelper()
+                serverHelper.getImageFor(photo: self)
             }
         }
     }
