@@ -9,15 +9,20 @@
 import UIKit
 
 class SettingsTravelModeTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var travelModeSwitch: UISwitch!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        travelModeSwitch.setOn(travelMode, animated: false)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func travelModeSwitchToggled(_ sender: UISwitch) {
+        travelMode = sender.isOn
     }
 }

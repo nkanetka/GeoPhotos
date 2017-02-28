@@ -13,6 +13,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     var delegate: LocationManagerDelegate?
     var locationManager: CLLocationManager = CLLocationManager()
     var mostRecentLocation: CLLocation? = nil
+    let notificationCenter = NotificationCenter.default
     
     override init() {
         super.init()
@@ -21,12 +22,17 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     func initialize() {
         setupLocationManager()
         self.resquestWhenInUseAuthorization()
+        notificationCenter.addObserver(self, selector:#selector(LocationManager.setDistanceFilter), name: NSNotification.Name(rawValue: GPNotificationUpdateDistanceFilter), object: nil)
     }
     
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.distanceFilter = 200
+    }
+    
+    func setDistanceFilter() {
+        locationManager.distanceFilter = CLLocationDistance((searchDistance * 1000) / 2)
     }
     
     func stopUpdatingLocation() {

@@ -13,7 +13,6 @@ import CoreLocation
 class ServerHelper: NSObject {
     
     var delegate: ServerHelperDelegate?
-    var presentlySearching: Bool = false
     var photosDictionaryArray: [[String:Any]] = [[:]]
     var photoURLsArray: [String] = []
     var photosArray: [UIImage] = []
@@ -28,52 +27,47 @@ class ServerHelper: NSObject {
         let safeSearch = "safe_search=1&"
         let lat = "lat=" + String(coordinate.latitude) + "&"
         let lon = "lon=" + String(coordinate.longitude) + "&"
-        let radius = "radius=20&radius_units=km&" // FIXME: Change to be user given
+        let radius = "radius=" + String(searchDistance) + "&radius_units=km&"
+        var perPage = "per_page="
+        if travelMode {
+            perPage = perPage + "20&"
+        }
+        else {
+            perPage = perPage + "100&"
+        }
         let options = "format=json&nojsoncallback=1"
-        let message = safeSearch + GPFlickrSearchMethod + GPFlickrAPIKey + lat + lon + radius + options
+        let message = safeSearch + GPFlickrSearchMethod + GPFlickrAPIKey + lat + lon + radius + perPage + options
         let requestURL = url + message
         self.callFlickrAPI(endpoint: requestURL, photo: nil)
     }
     
     func getDictionaryOfPhotoSizesFor(listOfPhotos: [Photo]) {
-        if presentlySearching == false {
-//            presentlySearching = true
-            array.removeAll()
-            array = listOfPhotos
-            for photo in listOfPhotos {
-                let url = GPFlickrBaseUrl + GPFLickrPhotosMethod + GPFlickrAPIKey + "photo_id=" + photo.id + "&" + GPFlickrOptions
-                callFlickrAPI(endpoint: url, photo: photo)
-            }
+        array.removeAll()
+        array = listOfPhotos
+        for photo in listOfPhotos {
+            let url = GPFlickrBaseUrl + GPFLickrPhotosMethod + GPFlickrAPIKey + "photo_id=" + photo.id + "&" + GPFlickrOptions
+            callFlickrAPI(endpoint: url, photo: photo)
         }
     }
     
-    func getPhotos(photoDictionaryArray: [[String:Any]]) {
-//        photosArray.removeAll()
-//        photoURLsArray.removeAll()
-//        
-//        for photo in photoDictionaryArray {
-//            if let photoID = photo["id"] as? String {
-//                let url = GPFlickrBaseUrl + GPFLickrPhotosMethod + GPFlickrAPIKey + "photo_id=" + photoID + "&" + GPFlickrOptions
-//                callFlickrAPI(endpoint: url)
-//            }
-//        }
-    }
-    
     func getImagesFor(listOfPhotos: [Photo]) {
-        print("Getting Images")
-        print("count: %@", listOfPhotos.count)
         array.removeAll()
         array = listOfPhotos
         
         for photo in listOfPhotos {
             if photo.mediumImageURL != "" {
-                print("URL for: %@", photo.mediumImageURL)
                 self.callFlickrAPI(endpoint: photo.mediumImageURL, photo: photo)
             }
         }
     }
     
+    func getImageDetails(photo: Photo) {
+         let endpoint = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=fe9944e50ef65a5c8c91d183ffe6d106&photo_id=" + photo.id + "&format=json&nojsoncallback=1"
+        callFlickrAPI(endpoint: endpoint, photo: photo)
+    }
+    
     private func callFlickrAPI(endpoint: String, photo: Photo?) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         var request = URLRequest(url: URL(string: endpoint)!)
         let session = URLSession.shared
         request.httpMethod = "GET"
@@ -92,18 +86,11 @@ class ServerHelper: NSObject {
                             let json = self.parseData(data: data!)
                             print("flickr.photos.getSizes")
                             photo?.imageSizeDictionary = json
-//                            photo?.mediumImageURL = self.getMediumPhotoURL(flickrJsonObject: json)
-//                            print(photo?.mediumImageURL)
                             
                             if (photo?.isEqual(self.array.last))! {
                                 print("Reached the last object")
                                 self.delegate?.didRecieveDictionaryOfPhotoSize(photosArray: self.array)
                             }
-//                            self.photoURLsArray.append(self.getPhotoURL(flickrJsonObject: json))
-//                            
-//                            if self.photoURLsArray.count == self.photosDictionaryArray.count {
-//                                self.getImages()
-//                            }
                         }
                         if endpoint.range(of: "farm") != nil {
                             print("Calling API")
@@ -111,13 +98,12 @@ class ServerHelper: NSObject {
                             
                             if (photo?.isEqual(self.array.last))! {
                                 self.delegate?.didRecievePhotos(photosArray: self.array)
-                                self.presentlySearching = false
                             }
-//                            self.photosArray.append(UIImage(data: data!)!)
-//                            
-//                            if self.photosArray.count == self.photoURLsArray.count {
-//                                self.delegate?.didFetchPhotos(newPhotos: self.photosArray)
-//                            }
+                        }
+                        if endpoint.range(of: "flickr.photos.getInfo") != nil {
+                            print("flickr.photos.getInfo")
+                            let json = self.parseData(data: data!)
+                            photo?.photoDataDictionary = json
                         }
                     default:
                         print("---- Error calling API ----")
@@ -129,6 +115,7 @@ class ServerHelper: NSObject {
                 print("---- Error Calling Flickr API ----")
                 print(error.debugDescription)
             }
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         })
         task.resume()
     }
@@ -168,7 +155,6 @@ class ServerHelper: NSObject {
                             return imageSize["source"] as! String
                         }
                     }
-                    
                 }
             }
         }

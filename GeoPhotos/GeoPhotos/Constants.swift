@@ -20,6 +20,10 @@ let GPUserDefaultsSearchDistanceKey = "searchDistance"
 let GPTableViewCellTravelModeKey = "SettingsCellTravelMode"
 let GPTableViewCellSearchDistanceKey = "SettingsCellDistance"
 
+let GPNotificationUpdateDistanceFilter = "UpdateDistanceFilter"
+
+let GPMapRegionRadius = 10000
+
 enum GPTableViewCell : Int {
     case SearchDistance = 0
     case TravelMode = 1

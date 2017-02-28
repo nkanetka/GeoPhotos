@@ -48,6 +48,7 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
                 
                 let destinationViewController = segue.destination as! PhotoDetailViewController
                 destinationViewController.photo = photo
+                destinationViewController.currentLocation = locations.last! as CLLocation
             }
         }
     }
@@ -113,14 +114,12 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     func didRecieveLocationUpdate(newLocation: CLLocation) {
         locations.append(newLocation)
         serverHelper.getPhotosFor(coordinate: newLocation.coordinate)
-        print("Location Update Recieved PhotoCollectionViewController")
     }
     
     // MARK: - ServerHelperDelegate
     func didRecieveListOfPhotos(photosArray: [Photo]) {
         self.photosArray.removeAll()
         self.photosArray = photosArray
-//        photosInfoDictionary = photosArray
         serverHelper.getDictionaryOfPhotoSizesFor(listOfPhotos: self.photosArray)
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
@@ -146,7 +145,6 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     func didFetchPhotos(newPhotos: [UIImage]) {
         photos.removeAll()
         photos = newPhotos
-        
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
