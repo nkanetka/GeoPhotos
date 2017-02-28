@@ -133,7 +133,7 @@ class ServerHelper: NSObject {
         task.resume()
     }
     
-    private func parseData(data: Data) -> [String:Any] {
+    func parseData(data: Data) -> [String:Any] {
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
             return json!

@@ -9,9 +9,7 @@
 import UIKit
 
 class PhotoDetailViewController: UIViewController {
-    var id: String!
-    var image: UIImage!
-    var imageTitle: String!
+    var photo: Photo!
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -20,8 +18,8 @@ class PhotoDetailViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = imageTitle
-        imageView.image = image
+        self.navigationController?.navigationBar.topItem?.title = photo.title
+        imageView.image = photo.image
         imageView.contentMode = .scaleAspectFill
     }
 }

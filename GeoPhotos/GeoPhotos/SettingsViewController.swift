@@ -49,8 +49,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsTableViewCell
-        cell.backgroundColor = UIColor.blue
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCellDistance") as! SettingsTableViewCell
         return cell
     }
 }

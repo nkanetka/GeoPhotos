@@ -47,9 +47,7 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
                 let photo: Photo = photosArray[selectedIndex]
                 
                 let destinationViewController = segue.destination as! PhotoDetailViewController
-                destinationViewController.id = photo.id
-                destinationViewController.image = photo.image
-                destinationViewController.imageTitle = photo.title
+                destinationViewController.photo = photo
             }
         }
     }
