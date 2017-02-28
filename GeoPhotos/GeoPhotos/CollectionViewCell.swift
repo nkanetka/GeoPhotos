@@ -9,9 +9,7 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
+    var id: String!
+    var title: String!
     @IBOutlet weak var imageView: UIImageView!
-    
-//    func setImage(image: UIImage) {
-//        imageView.image = image
-//    }
 }

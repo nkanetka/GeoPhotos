@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="aZZ-k9-kea">
             <objects>
-                <viewController id="Mtf-mJ-tWJ" sceneMemberID="viewController">
+                <viewController id="Mtf-mJ-tWJ" customClass="SettingsViewController" customModule="GeoPhotos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ESn-yT-ITx"/>
                         <viewControllerLayoutGuide type="bottom" id="kZ6-k9-DuZ"/>
@@ -20,12 +20,90 @@
                     <view key="view" contentMode="scaleToFill" id="LCa-XV-he2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wyc-m7-t4r">
+                                <rect key="frame" x="0.0" y="64" width="375" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="qzO-N8-zi3"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SettingsCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" rowHeight="50" id="utD-dj-VYh" customClass="SettingsTableViewCell" customModule="GeoPhotos" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="utD-dj-VYh" id="0d5-nl-VC3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwK-bR-t2z">
+                                                    <rect key="frame" x="166" y="14" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdv-Dn-FN7">
+                                <rect key="frame" x="0.0" y="354" width="375" height="50"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g7L-ML-2Zg">
+                                        <rect key="frame" x="23" y="10" width="329" height="31"/>
+                                        <connections>
+                                            <action selector="distanceSliderValueChanged:" destination="Mtf-mJ-tWJ" eventType="valueChanged" id="paQ-4f-OCH"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="g7L-ML-2Zg" firstAttribute="centerY" secondItem="Rdv-Dn-FN7" secondAttribute="centerY" id="9Ef-Au-CHV"/>
+                                    <constraint firstAttribute="trailing" secondItem="g7L-ML-2Zg" secondAttribute="trailing" constant="25" id="9Ty-kj-XHK"/>
+                                    <constraint firstItem="g7L-ML-2Zg" firstAttribute="leading" secondItem="Rdv-Dn-FN7" secondAttribute="leading" constant="25" id="KjL-8i-bVv"/>
+                                    <constraint firstAttribute="height" constant="50" id="qsj-8q-GLZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.83137254900000002" green="0.84705882349999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Wyc-m7-t4r" firstAttribute="leading" secondItem="LCa-XV-he2" secondAttribute="leading" id="Bgs-wY-YIY"/>
+                            <constraint firstItem="Rdv-Dn-FN7" firstAttribute="top" secondItem="Wyc-m7-t4r" secondAttribute="bottom" constant="50" id="P7j-DT-Unz"/>
+                            <constraint firstAttribute="trailing" secondItem="Wyc-m7-t4r" secondAttribute="trailing" id="Plv-O2-ek3"/>
+                            <constraint firstItem="Rdv-Dn-FN7" firstAttribute="leading" secondItem="LCa-XV-he2" secondAttribute="leading" id="QLx-Zi-z4G"/>
+                            <constraint firstAttribute="trailing" secondItem="Rdv-Dn-FN7" secondAttribute="trailing" id="YNN-Vk-wJA"/>
+                            <constraint firstItem="Wyc-m7-t4r" firstAttribute="top" secondItem="ESn-yT-ITx" secondAttribute="bottom" id="rPK-dn-72o"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aMC-3z-ZYe"/>
+                    <connections>
+                        <outlet property="distanceSlider" destination="g7L-ML-2Zg" id="9II-Zy-IEp"/>
+                        <outlet property="tableView" destination="Wyc-m7-t4r" id="P8e-Wn-6Al"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Vg-Sg-spL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="118"/>
+            <point key="canvasLocation" x="1128.8" y="117.39130434782609"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="ZRn-QE-atB">
+            <objects>
+                <navigationController storyboardIdentifier="Settings Navigation Controller" title="Settings" automaticallyAdjustsScrollViewInsets="NO" id="2Xt-5b-jRL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="REo-Zv-XNH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Mtf-mJ-tWJ" kind="relationship" relationship="rootViewController" id="Qi1-rw-D8Z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BXL-aR-X3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="189.59999999999999" y="117.39130434782609"/>
         </scene>
     </scenes>
 </document>

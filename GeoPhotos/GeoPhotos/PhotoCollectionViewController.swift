@@ -13,6 +13,7 @@ private let reuseIdentifier = "CollectionViewCell"
 
 class PhotoCollectionViewController: UICollectionViewController, LocationManagerDelegate, ServerHelperDelegate {
     
+    var selectedIndex: Int = -1
     var photos: [UIImage] = []
     var photosInfoDictionary: [[String:Any]] = [[:]]
     
@@ -27,18 +28,30 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         serverHelper.delegate = self
         locationManager.delegate = self
         locationManager.initialize()
+        locationManager.startUpdatingLocation()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // FIXME: Move to proper location
-        locationManager.startUpdatingLocation()
+        
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GPShowPhotoDetailSegue" {
+            if photos.count > 0 {
+                let photoDictionary: [String:Any] = photosInfoDictionary[selectedIndex]
+                let id = photoDictionary["id"] as! String
+                let title = photoDictionary["title"] as! String
+                
+                let destinationViewController = segue.destination as! PhotoDetailViewController
+                destinationViewController.id = id
+                destinationViewController.image = photos[selectedIndex]
+                destinationViewController.imageTitle = title
+            }
+        }
     }
 
     // MARK: - UICollectionViewDataSource
@@ -56,7 +69,13 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
         
         if photos.count > 0 {
-            cell.imageView.image = photos[indexPath.item]
+            cell.contentView.alpha = 0.0
+            cell.imageView.image = self.photos[indexPath.item]
+            cell.imageView.contentMode = .scaleAspectFill
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                cell.contentView.alpha = 1.0
+            }, completion: nil)
+            
         }
         
         return cell
@@ -72,14 +91,19 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.item
+        print("Selected Item")
+        performSegue(withIdentifier: "GPShowPhotoDetailSegue", sender: self)
+    }
 
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
+        return true
     }
 
     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
+        return true
     }
 
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
@@ -95,14 +119,21 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     
     // MARK: - ServerHelperDelegate
     func didRecievePhotos(photosArray: [[String:Any]]) {
+        photosInfoDictionary.removeAll()
         photosInfoDictionary = photosArray
         serverHelper.getPhotos(photoDictionaryArray: photosInfoDictionary)
-        self.collectionView?.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
     }
     
     func didFetchPhotos(newPhotos: [UIImage]) {
+        photos.removeAll()
         photos = newPhotos
-        self.collectionView?.reloadData()
+        
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
     }
     
     // MARK: - Methods

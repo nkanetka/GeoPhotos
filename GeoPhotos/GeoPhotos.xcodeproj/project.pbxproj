@@ -20,6 +20,9 @@
 		21F64FF71E64B0EB0000D3C2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FF61E64B0EB0000D3C2 /* CollectionViewCell.swift */; };
 		21F64FFA1E64B8B80000D3C2 /* ServerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FF91E64B8B80000D3C2 /* ServerHelper.swift */; };
 		21F64FFC1E64DF700000D3C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FFB1E64DF700000D3C2 /* Constants.swift */; };
+		21F64FFE1E650BB70000D3C2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FFD1E650BB70000D3C2 /* SettingsViewController.swift */; };
+		21F650001E65139D0000D3C2 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FFF1E65139D0000D3C2 /* SettingsTableViewCell.swift */; };
+		21F650041E65377C0000D3C2 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F650031E65377C0000D3C2 /* PhotoDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		21F64FF61E64B0EB0000D3C2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		21F64FF91E64B8B80000D3C2 /* ServerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerHelper.swift; sourceTree = "<group>"; };
 		21F64FFB1E64DF700000D3C2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		21F64FFD1E650BB70000D3C2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		21F64FFF1E65139D0000D3C2 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		21F650031E65377C0000D3C2 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +119,7 @@
 				21F64FFB1E64DF700000D3C2 /* Constants.swift */,
 				21F64FF11E6496630000D3C2 /* Storyboards */,
 				21F64FF21E6496700000D3C2 /* View Controllers */,
-				21F64FF81E64B0F10000D3C2 /* Collection View Cells */,
+				21F650021E6513B20000D3C2 /* Cells */,
 				21F64FF51E6496E80000D3C2 /* Helper Classes */,
 				21F64FC41E6492260000D3C2 /* Assets.xcassets */,
 				21F64FC91E6492260000D3C2 /* Info.plist */,
@@ -154,6 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				21F64FEF1E6496580000D3C2 /* PhotoCollectionViewController.swift */,
+				21F650031E65377C0000D3C2 /* PhotoDetailViewController.swift */,
+				21F64FFD1E650BB70000D3C2 /* SettingsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -173,6 +181,23 @@
 				21F64FF61E64B0EB0000D3C2 /* CollectionViewCell.swift */,
 			);
 			name = "Collection View Cells";
+			sourceTree = "<group>";
+		};
+		21F650011E6513A00000D3C2 /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				21F64FFF1E65139D0000D3C2 /* SettingsTableViewCell.swift */,
+			);
+			name = "TableView Cells";
+			sourceTree = "<group>";
+		};
+		21F650021E6513B20000D3C2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				21F650011E6513A00000D3C2 /* TableView Cells */,
+				21F64FF81E64B0F10000D3C2 /* Collection View Cells */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,8 +341,11 @@
 			files = (
 				21F64FBE1E6492260000D3C2 /* AppDelegate.swift in Sources */,
 				21F64FFA1E64B8B80000D3C2 /* ServerHelper.swift in Sources */,
+				21F650001E65139D0000D3C2 /* SettingsTableViewCell.swift in Sources */,
+				21F64FFE1E650BB70000D3C2 /* SettingsViewController.swift in Sources */,
 				21F64FF01E6496580000D3C2 /* PhotoCollectionViewController.swift in Sources */,
 				21F64FF71E64B0EB0000D3C2 /* CollectionViewCell.swift in Sources */,
+				21F650041E65377C0000D3C2 /* PhotoDetailViewController.swift in Sources */,
 				21F64FF41E6496990000D3C2 /* LocationManager.swift in Sources */,
 				21F64FFC1E64DF700000D3C2 /* Constants.swift in Sources */,
 			);
