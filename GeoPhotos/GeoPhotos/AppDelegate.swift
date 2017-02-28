@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        getData()
         return true
     }
 
@@ -38,7 +39,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        setData()
+    }
+    
+    func getData() {
+        if (defaults.object(forKey: GPUserDefaultsTravelModeKey) != nil) {
+            travelMode = defaults.bool(forKey: GPUserDefaultsTravelModeKey)
+        } else {
+            defaults.set(travelMode, forKey: GPUserDefaultsTravelModeKey)
+        }
+        
+        if (defaults.object(forKey: GPUserDefaultsSearchDistanceKey) != nil) {
+            searchDistance = defaults.integer(forKey: GPUserDefaultsSearchDistanceKey)
+        } else {
+            defaults.set(searchDistance, forKey: GPUserDefaultsSearchDistanceKey)
+        }
+    }
+    
+    func setData() {
+        defaults.set(travelMode, forKey: GPUserDefaultsTravelModeKey)
+        defaults.set(searchDistance, forKey: GPUserDefaultsSearchDistanceKey)
     }
 
 

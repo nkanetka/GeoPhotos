@@ -13,3 +13,14 @@ let GPFlickrSearchMethod = "method=flickr.photos.search&"
 let GPFLickrPhotosMethod = "method=flickr.photos.getSizes&"
 let GPFlickrAPIKey = "api_key=fe9944e50ef65a5c8c91d183ffe6d106&"
 let GPFlickrOptions = "format=json&nojsoncallback=1"
+
+let GPUserDefaultsTravelModeKey = "travelMode"
+let GPUserDefaultsSearchDistanceKey = "searchDistance"
+
+let GPTableViewCellTravelModeKey = "SettingsCellTravelMode"
+let GPTableViewCellSearchDistanceKey = "SettingsCellDistance"
+
+enum GPTableViewCell : Int {
+    case SearchDistance = 0
+    case TravelMode = 1
+}

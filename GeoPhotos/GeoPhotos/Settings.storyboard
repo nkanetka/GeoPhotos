@@ -71,13 +71,40 @@
                                             <outlet property="distanceSlider" destination="g7L-ML-2Zg" id="unS-17-XA0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1t0-GR-raj">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SettingsCellTravelMode" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCellTravelMode" rowHeight="70" id="1t0-GR-raj" customClass="SettingsTravelModeTableViewCell" customModule="GeoPhotos" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="98" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1t0-GR-raj" id="o4C-9i-sbK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Travel Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8o-wl-Rzz">
+                                                    <rect key="frame" x="20" y="15" width="94" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Travel Mode reduces the number of photos that are fetched when using the app." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaD-YW-H0S">
+                                                    <rect key="frame" x="20" y="50" width="335" height="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8q3-t0-Lcx">
+                                                    <rect key="frame" x="306" y="10" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="MaD-YW-H0S" secondAttribute="bottom" constant="10" id="DU3-lv-s1V"/>
+                                                <constraint firstItem="8q3-t0-Lcx" firstAttribute="top" secondItem="o4C-9i-sbK" secondAttribute="top" constant="10" id="FgG-qS-ax0"/>
+                                                <constraint firstItem="MaD-YW-H0S" firstAttribute="leading" secondItem="o4C-9i-sbK" secondAttribute="leading" constant="20" id="Ivq-a1-9md"/>
+                                                <constraint firstItem="G8o-wl-Rzz" firstAttribute="leading" secondItem="o4C-9i-sbK" secondAttribute="leading" constant="20" id="JnV-4i-6Om"/>
+                                                <constraint firstItem="8q3-t0-Lcx" firstAttribute="centerY" secondItem="G8o-wl-Rzz" secondAttribute="centerY" id="jEK-0o-TbE"/>
+                                                <constraint firstAttribute="trailing" secondItem="MaD-YW-H0S" secondAttribute="trailing" constant="20" id="jrl-zs-KZb"/>
+                                                <constraint firstAttribute="trailing" secondItem="8q3-t0-Lcx" secondAttribute="trailing" constant="20" id="nly-h8-BTU"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
