@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="aZZ-k9-kea">
             <objects>
                 <viewController id="Mtf-mJ-tWJ" customClass="SettingsViewController" customModule="GeoPhotos" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="utD-dj-VYh" id="0d5-nl-VC3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="g7L-ML-2Zg">
@@ -75,7 +75,7 @@
                                         <rect key="frame" x="0.0" y="108" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1t0-GR-raj" id="o4C-9i-sbK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Travel Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8o-wl-Rzz">
@@ -122,7 +122,7 @@
                             <constraint firstItem="Wyc-m7-t4r" firstAttribute="top" secondItem="ESn-yT-ITx" secondAttribute="bottom" id="rPK-dn-72o"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aMC-3z-ZYe"/>
+                    <navigationItem key="navigationItem" title="Settings" id="aMC-3z-ZYe"/>
                     <connections>
                         <outlet property="tableView" destination="Wyc-m7-t4r" id="P8e-Wn-6Al"/>
                     </connections>
