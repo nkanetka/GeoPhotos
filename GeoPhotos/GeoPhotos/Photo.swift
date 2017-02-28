@@ -15,14 +15,14 @@ class Photo: NSObject {
             serverHelper.getImageDetails(photo: self)
         }
     }
-    var city: String = ""
-    var title: String = ""
-    var state: String = ""
-    var author: String = ""
-    var county: String = ""
-    var country: String = ""
-    var latitude: String = ""
-    var longitude: String = ""
+    var city: String = GPUnknownString
+    var title: String = GPUnknownString
+    var state: String = GPUnknownString
+    var author: String = GPUnknownString
+    var county: String = GPUnknownString
+    var country: String = GPUnknownString
+    var latitude: String = GPUnknownString
+    var longitude: String = GPUnknownString
     var mediumImageURL: String = ""
     var image: UIImage!
     var photoDataDictionary: [String:Any] = [:] {
