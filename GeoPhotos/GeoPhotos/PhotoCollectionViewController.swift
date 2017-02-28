@@ -11,7 +11,10 @@ import CoreLocation
 
 private let reuseIdentifier = "CollectionViewCell"
 
-class PhotoCollectionViewController: UICollectionViewController, LocationManagerDelegate {
+class PhotoCollectionViewController: UICollectionViewController, LocationManagerDelegate, ServerHelperDelegate {
+    
+    var photos: [UIImage] = []
+    var photosInfoDictionary: [[String:Any]] = [[:]]
     
     var locations: [CLLocation] = []
     var serverHelper: ServerHelper = ServerHelper()
@@ -21,6 +24,7 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        serverHelper.delegate = self
         locationManager.delegate = self
         locationManager.initialize()
 
@@ -44,11 +48,17 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        print(photosInfoDictionary.count)
+        return photosInfoDictionary.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
+        
+        if photos.count > 0 {
+            cell.imageView.image = photos[indexPath.item]
+        }
+        
         return cell
     }
 
@@ -81,6 +91,18 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         locations.append(newLocation)
         serverHelper.getPhotosFor(coordinate: newLocation.coordinate)
         print("Location Update Recieved PhotoCollectionViewController")
+    }
+    
+    // MARK: - ServerHelperDelegate
+    func didRecievePhotos(photosArray: [[String:Any]]) {
+        photosInfoDictionary = photosArray
+        serverHelper.getPhotos(photoDictionaryArray: photosInfoDictionary)
+        self.collectionView?.reloadData()
+    }
+    
+    func didFetchPhotos(newPhotos: [UIImage]) {
+        photos = newPhotos
+        self.collectionView?.reloadData()
     }
     
     // MARK: - Methods

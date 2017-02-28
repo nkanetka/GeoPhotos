@@ -10,4 +10,6 @@ import Foundation
 
 let GPFlickrBaseUrl = "https://api.flickr.com/services/rest/?"
 let GPFlickrSearchMethod = "method=flickr.photos.search&"
-let GPFlickrAPIKey = "api_key=d8f4c643269dd7525a6b57625f2cca57&"
+let GPFLickrPhotosMethod = "method=flickr.photos.getSizes&"
+let GPFlickrAPIKey = "api_key=fe9944e50ef65a5c8c91d183ffe6d106&"
+let GPFlickrOptions = "format=json&nojsoncallback=1"

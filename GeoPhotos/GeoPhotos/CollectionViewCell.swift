@@ -11,7 +11,7 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
-    func setImage(image: UIImage) {
-        imageView.image = image
-    }
+//    func setImage(image: UIImage) {
+//        imageView.image = image
+//    }
 }
