@@ -13,9 +13,11 @@ import CoreLocation
 class ServerHelper: NSObject {
     
     var delegate: ServerHelperDelegate?
+    var presentlySearching: Bool = false
     var photosDictionaryArray: [[String:Any]] = [[:]]
     var photoURLsArray: [String] = []
     var photosArray: [UIImage] = []
+    var array: [Photo] = []
     
     override init() {
         super.init()
@@ -30,28 +32,48 @@ class ServerHelper: NSObject {
         let options = "format=json&nojsoncallback=1"
         let message = safeSearch + GPFlickrSearchMethod + GPFlickrAPIKey + lat + lon + radius + options
         let requestURL = url + message
-        self.callFlickrAPI(endpoint: requestURL)
+        self.callFlickrAPI(endpoint: requestURL, photo: nil)
     }
     
-    func getPhotos(photoDictionaryArray: [[String:Any]]) {
-        photosArray.removeAll()
-        photoURLsArray.removeAll()
-        
-        for photo in photoDictionaryArray {
-            if let photoID = photo["id"] as? String {
-                let url = GPFlickrBaseUrl + GPFLickrPhotosMethod + GPFlickrAPIKey + "photo_id=" + photoID + "&" + GPFlickrOptions
-                callFlickrAPI(endpoint: url)
+    func getDictionaryOfPhotoSizesFor(listOfPhotos: [Photo]) {
+        if presentlySearching == false {
+//            presentlySearching = true
+            array.removeAll()
+            array = listOfPhotos
+            for photo in listOfPhotos {
+                let url = GPFlickrBaseUrl + GPFLickrPhotosMethod + GPFlickrAPIKey + "photo_id=" + photo.id + "&" + GPFlickrOptions
+                callFlickrAPI(endpoint: url, photo: photo)
             }
         }
     }
     
-    func getImages() {
-        for photoURL in self.photoURLsArray {
-            self.callFlickrAPI(endpoint: photoURL)
+    func getPhotos(photoDictionaryArray: [[String:Any]]) {
+//        photosArray.removeAll()
+//        photoURLsArray.removeAll()
+//        
+//        for photo in photoDictionaryArray {
+//            if let photoID = photo["id"] as? String {
+//                let url = GPFlickrBaseUrl + GPFLickrPhotosMethod + GPFlickrAPIKey + "photo_id=" + photoID + "&" + GPFlickrOptions
+//                callFlickrAPI(endpoint: url)
+//            }
+//        }
+    }
+    
+    func getImagesFor(listOfPhotos: [Photo]) {
+        print("Getting Images")
+        print("count: %@", listOfPhotos.count)
+        array.removeAll()
+        array = listOfPhotos
+        
+        for photo in listOfPhotos {
+            if photo.mediumImageURL != "" {
+                print("URL for: %@", photo.mediumImageURL)
+                self.callFlickrAPI(endpoint: photo.mediumImageURL, photo: photo)
+            }
         }
     }
     
-    private func callFlickrAPI(endpoint: String) {
+    private func callFlickrAPI(endpoint: String, photo: Photo?) {
         var request = URLRequest(url: URL(string: endpoint)!)
         let session = URLSession.shared
         request.httpMethod = "GET"
@@ -69,19 +91,33 @@ class ServerHelper: NSObject {
                         if endpoint.range(of: "flickr.photos.getSizes") != nil {
                             let json = self.parseData(data: data!)
                             print("flickr.photos.getSizes")
-                            self.photoURLsArray.append(self.getPhotoURL(flickrJsonObject: json))
+                            photo?.imageSizeDictionary = json
+//                            photo?.mediumImageURL = self.getMediumPhotoURL(flickrJsonObject: json)
+//                            print(photo?.mediumImageURL)
                             
-                            if self.photoURLsArray.count == self.photosDictionaryArray.count {
-                                self.getImages()
+                            if (photo?.isEqual(self.array.last))! {
+                                print("Reached the last object")
+                                self.delegate?.didRecieveDictionaryOfPhotoSize(photosArray: self.array)
                             }
+//                            self.photoURLsArray.append(self.getPhotoURL(flickrJsonObject: json))
+//                            
+//                            if self.photoURLsArray.count == self.photosDictionaryArray.count {
+//                                self.getImages()
+//                            }
                         }
                         if endpoint.range(of: "farm") != nil {
-                            self.photosArray.append(UIImage(data: data!)!)
-                            
-                            if self.photosArray.count == self.photoURLsArray.count {
-                                self.delegate?.didFetchPhotos(newPhotos: self.photosArray)
-                            }
                             print("Calling API")
+                            photo?.image = UIImage(data: data!)!
+                            
+                            if (photo?.isEqual(self.array.last))! {
+                                self.delegate?.didRecievePhotos(photosArray: self.array)
+                                self.presentlySearching = false
+                            }
+//                            self.photosArray.append(UIImage(data: data!)!)
+//                            
+//                            if self.photosArray.count == self.photoURLsArray.count {
+//                                self.delegate?.didFetchPhotos(newPhotos: self.photosArray)
+//                            }
                         }
                     default:
                         print("---- Error calling API ----")
@@ -109,13 +145,21 @@ class ServerHelper: NSObject {
     }
     
     private func getArrayOfPhotosIDs(flickrJsonObject: [String:Any]) {
+        array.removeAll()
         if let photos = flickrJsonObject["photos"] as? [String:Any] {
             photosDictionaryArray = photos["photo"] as! [[String : Any]]
-            delegate?.didRecievePhotos(photosArray: photosDictionaryArray)
+            
+            for photo in photosDictionaryArray {
+                let newPhoto = Photo()
+                newPhoto.id = photo["id"] as! String
+                newPhoto.title = photo["title"] as! String
+                array.append(newPhoto)
+            }
+            delegate?.didRecieveListOfPhotos(photosArray: array)
         }
     }
     
-    private func getPhotoURL(flickrJsonObject: [String:Any]) -> String {
+    private func getMediumPhotoURL(flickrJsonObject: [String:Any]) -> String {
         if let sizes = flickrJsonObject["sizes"] as? [String:Any] {
             if let size = sizes["size"] as? [[String:Any]] {
                 for imageSize in size {
@@ -133,6 +177,8 @@ class ServerHelper: NSObject {
 }
 
 protocol ServerHelperDelegate {
-    func didRecievePhotos(photosArray: [[String:Any]])
+    func didRecieveListOfPhotos(photosArray: [Photo])
+    func didRecieveDictionaryOfPhotoSize(photosArray: [Photo])
+    func didRecievePhotos(photosArray: [Photo])
     func didFetchPhotos(newPhotos: [UIImage])
 }

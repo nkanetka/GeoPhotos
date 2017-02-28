@@ -22,6 +22,6 @@ class PhotoDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = imageTitle
         imageView.image = image
-        print(id)
+        imageView.contentMode = .scaleAspectFill
     }
 }

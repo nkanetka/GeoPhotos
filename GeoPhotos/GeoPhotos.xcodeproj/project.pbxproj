@@ -23,6 +23,7 @@
 		21F64FFE1E650BB70000D3C2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FFD1E650BB70000D3C2 /* SettingsViewController.swift */; };
 		21F650001E65139D0000D3C2 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F64FFF1E65139D0000D3C2 /* SettingsTableViewCell.swift */; };
 		21F650041E65377C0000D3C2 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F650031E65377C0000D3C2 /* PhotoDetailViewController.swift */; };
+		21F650061E653F320000D3C2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F650051E653F320000D3C2 /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		21F64FFD1E650BB70000D3C2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		21F64FFF1E65139D0000D3C2 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		21F650031E65377C0000D3C2 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		21F650051E653F320000D3C2 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		21F64FF51E6496E80000D3C2 /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				21F650051E653F320000D3C2 /* Photo.swift */,
 				21F64FF91E64B8B80000D3C2 /* ServerHelper.swift */,
 				21F64FF31E6496990000D3C2 /* LocationManager.swift */,
 			);
@@ -343,6 +346,7 @@
 				21F64FFA1E64B8B80000D3C2 /* ServerHelper.swift in Sources */,
 				21F650001E65139D0000D3C2 /* SettingsTableViewCell.swift in Sources */,
 				21F64FFE1E650BB70000D3C2 /* SettingsViewController.swift in Sources */,
+				21F650061E653F320000D3C2 /* Photo.swift in Sources */,
 				21F64FF01E6496580000D3C2 /* PhotoCollectionViewController.swift in Sources */,
 				21F64FF71E64B0EB0000D3C2 /* CollectionViewCell.swift in Sources */,
 				21F650041E65377C0000D3C2 /* PhotoDetailViewController.swift in Sources */,

@@ -17,6 +17,8 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     var photos: [UIImage] = []
     var photosInfoDictionary: [[String:Any]] = [[:]]
     
+    var photosArray: [Photo] = []
+    
     var locations: [CLLocation] = []
     var serverHelper: ServerHelper = ServerHelper()
     var locationManager: LocationManager = LocationManager()
@@ -41,15 +43,13 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GPShowPhotoDetailSegue" {
-            if photos.count > 0 {
-                let photoDictionary: [String:Any] = photosInfoDictionary[selectedIndex]
-                let id = photoDictionary["id"] as! String
-                let title = photoDictionary["title"] as! String
+            if photosArray.count > 0 {
+                let photo: Photo = photosArray[selectedIndex]
                 
                 let destinationViewController = segue.destination as! PhotoDetailViewController
-                destinationViewController.id = id
-                destinationViewController.image = photos[selectedIndex]
-                destinationViewController.imageTitle = title
+                destinationViewController.id = photo.id
+                destinationViewController.image = photo.image
+                destinationViewController.imageTitle = photo.title
             }
         }
     }
@@ -61,16 +61,17 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(photosInfoDictionary.count)
-        return photosInfoDictionary.count
+        print(photosArray.count)
+        return photosArray.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
         
-        if photos.count > 0 {
+        if photosArray.count > 0 {
+            let photo: Photo = photosArray[indexPath.item]
             cell.contentView.alpha = 0.0
-            cell.imageView.image = self.photos[indexPath.item]
+            cell.imageView.image = photo.image
             cell.imageView.contentMode = .scaleAspectFill
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
                 cell.contentView.alpha = 1.0
@@ -118,10 +119,27 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     }
     
     // MARK: - ServerHelperDelegate
-    func didRecievePhotos(photosArray: [[String:Any]]) {
-        photosInfoDictionary.removeAll()
-        photosInfoDictionary = photosArray
-        serverHelper.getPhotos(photoDictionaryArray: photosInfoDictionary)
+    func didRecieveListOfPhotos(photosArray: [Photo]) {
+        self.photosArray.removeAll()
+        self.photosArray = photosArray
+//        photosInfoDictionary = photosArray
+        serverHelper.getDictionaryOfPhotoSizesFor(listOfPhotos: self.photosArray)
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    func didRecieveDictionaryOfPhotoSize(photosArray: [Photo]) {
+        self.photosArray.removeAll()
+        self.photosArray = photosArray
+        let photo: Photo = self.photosArray[1]
+        print(photo.mediumImageURL)
+        serverHelper.getImagesFor(listOfPhotos: self.photosArray)
+    }
+    
+    func didRecievePhotos(photosArray: [Photo]) {
+        self.photosArray.removeAll()
+        self.photosArray = photosArray
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
