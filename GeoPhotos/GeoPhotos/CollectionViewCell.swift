@@ -9,7 +9,6 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-    var id: String!
-    var title: String!
+    var photo: Photo!
     @IBOutlet weak var imageView: UIImageView!
 }

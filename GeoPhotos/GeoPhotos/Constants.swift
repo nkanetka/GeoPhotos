@@ -29,6 +29,7 @@ let GPTableViewCellSearchDistanceKey = "SettingsCellDistance"
 // DistanceFilter Notification
 let GPNotificationUpdateDistanceFilter = "UpdateDistanceFilter"
 let GPNotificationStopUpdatingLocation = "StopUpdatingLocation"
+let GPNotificationUpdateCollectionViewCell = "UpdateCollectionViewCell"
 
 // String Constants
 let GPUnknownString = "Unknown"

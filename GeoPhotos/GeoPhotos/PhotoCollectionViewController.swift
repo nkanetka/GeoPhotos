@@ -12,6 +12,7 @@ import CoreLocation
 class PhotoCollectionViewController: UICollectionViewController, LocationManagerDelegate, ServerHelperDelegate {
     var selectedIndex: Int = -1
     var locations: [CLLocation] = []
+//    let notificationCenter = NotificationCenter.default
     var photosArray: [Photo] = []
     var serverHelper: ServerHelper = ServerHelper()
     var locationManager: LocationManager = LocationManager()
@@ -27,7 +28,7 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.collectionView?.reloadData()
     }
 
     // MARK: - Navigation
@@ -58,12 +59,15 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         if photosArray.count > 0 {
             let photo: Photo = photosArray[indexPath.item]
             cell.contentView.alpha = 0.0
+            cell.photo = photo
+            if photo.image == nil {
+                photo.checkIfPhotoHasImageLoaded()
+            }
             cell.imageView.image = photo.image
             cell.imageView.contentMode = .scaleAspectFill
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
                 cell.contentView.alpha = 1.0
             }, completion: nil)
-            
         }
         
         return cell
@@ -124,5 +128,11 @@ class PhotoCollectionViewController: UICollectionViewController, LocationManager
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
+    }
+    
+    func updateCollectionViewPhoto(photoToUpdate: Photo) {
+        let index = photosArray.index(of: photoToUpdate)
+        let indexPath: IndexPath = IndexPath(index: index!)
+        self.collectionView?.reloadItems(at: [indexPath])
     }
 }

@@ -15,6 +15,7 @@ class ServerHelper: NSObject {
     var delegate: ServerHelperDelegate?
     var photosArray: [Photo] = []
     var gettingSingleImage: Bool = false
+//    let notificationCenter = NotificationCenter.default
     
     override init() {
         super.init()
@@ -98,7 +99,9 @@ class ServerHelper: NSObject {
                             photo?.image = UIImage(data: data!)!
                             
                             if self.gettingSingleImage {
+                                self.delegate?.updateCollectionViewPhoto(photoToUpdate: photo!)
                                 self.gettingSingleImage = false
+                                
                             }
                             else {
                                 if (photo?.isEqual(self.photosArray.last))! {
@@ -171,4 +174,5 @@ protocol ServerHelperDelegate {
     func didRecieveListOfPhotos(photosArray: [Photo])
     func didRecieveDictionaryOfPhotoSize(photosArray: [Photo])
     func didRecievePhotos(photosArray: [Photo])
+    func updateCollectionViewPhoto(photoToUpdate: Photo)
 }
