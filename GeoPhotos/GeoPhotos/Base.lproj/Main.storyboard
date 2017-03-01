@@ -13,7 +13,7 @@
         <scene sceneID="bV5-EP-3Uy">
             <objects>
                 <viewControllerPlaceholder storyboardName="PhotoCollection" referencedIdentifier="Photo Collection Navigation Controller" id="dSZ-9P-meW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Photos" id="AYp-Bl-bH8"/>
+                    <tabBarItem key="tabBarItem" title="Photos" image=" " selectedImage=" " id="AYp-Bl-bH8"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9XA-KN-1ZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -23,7 +23,7 @@
         <scene sceneID="juh-i5-fer">
             <objects>
                 <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="Settings Navigation Controller" id="H5W-12-jfS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="cXb-MU-kFU"/>
+                    <tabBarItem key="tabBarItem" selectedImage=" " systemItem="more" id="cXb-MU-kFU"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGm-Ph-XgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -48,4 +48,7 @@
             <point key="canvasLocation" x="147" y="797"/>
         </scene>
     </scenes>
+    <resources>
+        <image name=" " width="16" height="16"/>
+    </resources>
 </document>
