@@ -15,7 +15,6 @@ class ServerHelper: NSObject {
     var delegate: ServerHelperDelegate?
     var photosArray: [Photo] = []
     var gettingSingleImage: Bool = false
-//    let notificationCenter = NotificationCenter.default
     
     override init() {
         super.init()

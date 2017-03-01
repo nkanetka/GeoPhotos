@@ -12,7 +12,6 @@ import CoreLocation
 class PhotoCollectionViewController: UICollectionViewController, LocationManagerDelegate, ServerHelperDelegate {
     var selectedIndex: Int = -1
     var locations: [CLLocation] = []
-//    let notificationCenter = NotificationCenter.default
     var photosArray: [Photo] = []
     var serverHelper: ServerHelper = ServerHelper()
     var locationManager: LocationManager = LocationManager()
